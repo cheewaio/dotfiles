@@ -9,6 +9,14 @@ if [[ -z "$TMUX" ]]; then
     tmux attach -t TMUX || tmux new -s TMUX
 fi
 
+# zsh-syntax-highlighting
+[[ -e "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] || brew install zsh-syntax-highlighting
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# zsh-autosuggestions
+[[ -e "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] || brew install zsh-autosuggestions
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # fzf
 [[ -n "$(command -v fzf 2>/dev/null)" ]] || brew install fzf
 source <(fzf --zsh)
