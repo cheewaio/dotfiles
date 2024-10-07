@@ -5,7 +5,7 @@ eval "$(starship init zsh)"
 
 # tmux
 [[ -n "$(command -v tmux 2>/dev/null)" ]] || brew install tmux
-if [[ -z "$TMUX" ]]; then
+if [[ -z "$TMUX" ]] && [[ "$TERM_PROGRAM" != "vscode" ]; then
     tmux attach -t TMUX || tmux new -s TMUX
 fi
 
