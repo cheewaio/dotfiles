@@ -4,10 +4,10 @@ return {
   config = function()
     local conform = require('conform')
     conform.setup({
-      format_on_save = {
-        timeout_ms = 500,
-        lsp_fallback = true,
-      },
+      -- format_on_save = {
+      --   timeout_ms = 500,
+      --   lsp_fallback = true,
+      -- },
       formatters_by_ft = {
         json = { 'prettier' },
         javascript = { 'prettier' },
