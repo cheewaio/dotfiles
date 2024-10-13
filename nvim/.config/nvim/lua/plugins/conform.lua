@@ -1,31 +1,31 @@
 return {
-  'stevearc/conform.nvim',
-  event = { 'BufReadPre', 'BufNewFile' },
+  "stevearc/conform.nvim",
+  event = { "BufReadPre", "BufNewFile" },
   config = function()
-    local conform = require('conform')
+    local conform = require("conform")
     conform.setup({
-      -- format_on_save = {
-      --   timeout_ms = 500,
-      --   lsp_fallback = true,
-      -- },
       formatters_by_ft = {
-        json = { 'prettier' },
-        javascript = { 'prettier' },
+        bash = { "beautysh" },
+        css = { "prettierd", "prettier" },
         go = { "goimports", "gofmt" },
-        lua = { 'stylua' },
-        python = { 'prettier' },
-        terraform = { 'terraform_fmt' },
-        typescript = { 'prettier' },
-        yaml = { 'prettier' },
+        json = { "prettier" },
+        javascript = { "prettier" },
+        lua = { "stylua" },
+        python = { "prettier" },
+        scss = { "prettierd", "prettier" },
+        sh = { "shellcheck" },
+        terraform = { "terraform_fmt" },
+        typescript = { "prettier" },
+        yaml = { "prettier" },
       },
     })
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      pattern = '*',
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      pattern = "*",
       callback = function(args)
-        require('conform').format({ bufnr = args.buf })
+        require("conform").format({ bufnr = args.buf })
       end,
     })
-    vim.keymap.set({ 'n', 'v' }, '<leader>cf', function()
+    vim.keymap.set({ "n", "v" }, "<leader>cf", function()
       conform.format({
         lsp_fallback = true,
         async = false,
