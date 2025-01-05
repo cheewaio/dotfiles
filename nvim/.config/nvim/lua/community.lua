@@ -16,6 +16,7 @@ return {
   { import = "astrocommunity.pack.vue" },
   { import = "astrocommunity.pack.yaml" },
   { import = "astrocommunity.recipes.heirline-nvchad-statusline" },
+  { import = "astrocommunity.recipes.telescope-lsp-mappings" },
   { import = "astrocommunity.split-and-window.windows-nvim" },
   { import = "astrocommunity.utility.hover-nvim" },
   -- import/override with your plugins folder
