@@ -66,18 +66,12 @@ return {
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
-
-        ["<C-\\>"] = { "<Cmd>ToggleTerm direction=float<CR>", desc = "Toggle floating terminal" },
       },
 
       -- insert mode
-      i = {
-        ["<C-\\>"] = { "<Esc><Cmd>ToggleTerm<CR>", desc = "Toggl terminal" },
-      },
+      i = {},
       -- term mode
-      t = {
-        ["<C-\\>"] = { "<Cmd>ToggleTerm<CR>", desc = "Toggle terminal" },
-      },
+      t = {},
     },
   },
 }
