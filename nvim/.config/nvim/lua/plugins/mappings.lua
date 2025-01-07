@@ -7,7 +7,8 @@ return {
         -- normal mode
         n = {
           ["<C-\\>"] = { "<Cmd>ToggleTerm direction=float<CR>", desc = "Toggle floating terminal" },
-          ["<Leader>gd"] = { "<Cmd>DiffviewOpe<CR>", desc = "Git Diff View" },
+          ["<Leader>gv"] = { "<Cmd>DiffviewOpen<CR>", desc = "Open Git Diff View" },
+          ["<Leader>gV"] = { "<Cmd>DiffviewClose<CR>", desc = "Close Git Diff View" },
         },
         -- insert mode
         i = {
