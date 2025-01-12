@@ -25,7 +25,7 @@ return {
           -- "go",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
-          -- "python",
+          "graphql",
         },
       },
       disabled = { -- disable formatting capabilities for the listed language servers
@@ -92,6 +92,17 @@ return {
           cond = function(client)
             return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens ~= nil
           end,
+        },
+        ["<Leader>lo"] = {
+          function()
+            require("telescope.builtin").lsp_document_symbols {
+              ignore_symbols = {
+                "property",
+                "variable",
+              },
+            }
+          end,
+          desc = "Find LSP Outline",
         },
       },
     },

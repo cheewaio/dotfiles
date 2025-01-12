@@ -66,12 +66,17 @@ return {
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
-      },
 
-      -- insert mode
-      i = {},
-      -- term mode
-      t = {},
+        ["<C-\\>"] = { "<Cmd>ToggleTerm direction=float<CR>", desc = "Toggle floating terminal" },
+        ["<Leader>gv"] = { "<Cmd>DiffviewOpen<CR>", desc = "Open Git Diff View" },
+        ["<Leader>gV"] = { "<Cmd>DiffviewClose<CR>", desc = "Close Git Diff View" },
+      },
+      i = {
+        ["<C-\\>"] = { "<Esc><Cmd>ToggleTerm<CR>", desc = "Toggle floating terminal" },
+      },
+      t = {
+        ["<C-\\>"] = { "<Cmd>ToggleTerm<CR>", desc = "Toggle floating terminal" },
+      },
     },
   },
 }

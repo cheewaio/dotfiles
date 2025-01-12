@@ -23,5 +23,4 @@ return {
   { import = "astrocommunity.search.grug-far-nvim" },
   { import = "astrocommunity.split-and-window.windows-nvim" },
   { import = "astrocommunity.utility.hover-nvim" },
-  -- import/override with your plugins folder
 }
