@@ -1,14 +1,6 @@
-# zsh Options
-setopt HIST_IGNORE_ALL_DUPS
+# load all zsh configuration files
+local script_dir="$(cd "$(dirname "$0")" && pwd)"
+for file in $script_dir/.config/zsh/*.zsh; do
+  source "$file"
+done
 
-# Aliases
-[[ -e "$HOME/.config/zsh/aliases.zsh" ]] && source "$HOME/.config/zsh/aliases.zsh"
-
-# Custom zsh
-[[ -e "$HOME/.config/zsh/custom.zsh" ]] && source "$HOME/.config/zsh/custom.zsh"
-
-# Development
-[[ -e "$HOME/.config/zsh/dev.zsh" ]] && source "$HOME/.config/zsh/dev.zsh"
-
-# Work
-[[ -e "$HOME/.config/zsh/work.zsh" ]] && source "$HOME/.config/zsh/work.zsh"

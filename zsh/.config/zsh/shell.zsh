@@ -1,3 +1,6 @@
+## zsh Options
+setopt HIST_IGNORE_ALL_DUPS
+
 # starship
 [[ -n "$(command -v starship 2>/dev/null)" ]] || brew install starship
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
@@ -8,7 +11,7 @@ eval "$(starship init zsh)"
 if [[ -z "$TMUX" ]] && [[ "$TERM_PROGRAM" != "vscode" ]] && [[ "$TERM_PROGRAM" != "intellij" ]]; then
     tmux attach -t tmux || tmux new -s tmux
 fi
-
+ 
 # zsh-syntax-highlighting
 [[ -e "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] || brew install zsh-syntax-highlighting
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

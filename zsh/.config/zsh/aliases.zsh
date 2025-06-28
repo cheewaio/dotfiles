@@ -1,6 +1,6 @@
 alias cd=z
-alias k=kubectl
-alias kn="kubectl config set-context --current --namespace="
+alias cdi=zi
+alias k="kubectl"
 alias ls="ls -F"
 alias stow="stow -t $HOME"
 alias vi="nvim"

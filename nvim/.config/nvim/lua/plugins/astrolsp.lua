@@ -1,4 +1,4 @@
--- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- AstroLSP allows you to customize the features in AstroNvim's LSP configuration engine
 -- Configuration documentation can be found with `:h astrolsp`
@@ -20,12 +20,12 @@ return {
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enabled = false, -- enable or disable format on save globally
+        enabled = true, -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
-          "graphql",
+          -- "python",
         },
       },
       disabled = { -- disable formatting capabilities for the listed language servers
@@ -92,17 +92,6 @@ return {
           cond = function(client)
             return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens ~= nil
           end,
-        },
-        ["<Leader>lo"] = {
-          function()
-            require("telescope.builtin").lsp_document_symbols {
-              ignore_symbols = {
-                "property",
-                "variable",
-              },
-            }
-          end,
-          desc = "Find LSP Outline",
         },
       },
     },
