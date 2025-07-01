@@ -1,6 +1,15 @@
-# load all zsh configuration files
-local script_dir="$(cd "$(dirname "$0")" && pwd)"
-for file in $script_dir/.config/zsh/*.zsh; do
-  source "$file"
+export XDG_CONFIG_HOME="$HOME/.config"
+
+# Load all zsh configuration files
+for file in "$XDG_CONFIG_HOME/zsh"/*.zsh; do
+  if [[ -f "$file" ]]; then
+    source "$file"
+  fi
 done
 
+# Load all zsh functions files
+for file in "$XDG_CONFIG_HOME/zsh/functions"/*.sh; do
+  if [[ -f "$file" ]]; then
+    source "$file"
+  fi
+done
