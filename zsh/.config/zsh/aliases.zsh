@@ -1,5 +1,6 @@
 alias cd=z
 alias cdi=zi
+alias cursor="open -a Cursor"
 alias dps="docker_interactive_ps"
 alias k="kubectl"
 alias kctx="kubectl_switch_context"
