@@ -1,47 +1,47 @@
 export KUBE_EDITOR="nvim"
 
-function kubectl_interactive_pods() {
-  local command="kubectl get pods $@"
-
-  eval "$command" | \
-    fzf --header-lines=1 --height=100% \
-        --prompt "> " \
-        --header $'Enter (Shell) ╱ F2 (Refresh) / Ctrl-D (Describe) ╱ Ctrl-E (Edit) ╱ Ctrl-K (Kill) ╱ Ctrl-L (Logs) / Ctrl-N (Namespace) ╱ Ctrl-P (Preview) ╱ Ctrl-Y (YAML)\n\n' \
-        --bind "ENTER:execute:(kubectl exec -it {1} -- bash 2>/dev/null || kubectl exec -it {1} -- sh > /dev/tty)" \
-        --bind "F2:reload:($command)" \
-        --bind "CTRL-D:execute(kubectl describe pod {1} | nvim -R)" \
-        --bind "CTRL-E:execute:(kubectl edit pod {1})" \
-        --bind "CTRL-K:execute:(kubectl delete pod {1})" \
-        --bind "CTRL-L:execute:(kubectl logs --all-containers {1} | nvim +':set ft=log' -R)" \
-        --bind "CTRL-N:execute-silent(bash -c \"kubectl get ns -o custom-columns=:metadata.name | grep -v '^$' | fzf --tmux | xargs -r kubectl config set-context --current --namespace > /dev/null\")" \
-        --bind "CTRL-P:change-preview-window(80%,border-bottom|hidden|)" \
-        --bind "CTRL-Y:execute:(kubectl get pod {1} -o yaml | nvim +':set ft=yaml' -R)" \
-        --preview-window down:follow \
-        --preview "kubectl logs --follow --all-containers --tail=10000 {1}"
-}
-
 function kubectl_interactive_get() {
-  if [[ $# -lt 1 ]]; then
-    echo "Usage: kget <resource_type> [options]"
-    return 1
+  if [[ $# -eq 0 ]]; then
+    local resource_type=$(kubectl api-resources --no-headers | awk '{print $1}' | fzf --header='NAME')
+    local opt=""
+  else
+    local resource_type=$1
+    shift
+    local opt="$@"
   fi
 
-  local resource_type=$1
-  resource_type=$(echo "$resource_type" | sed 's/s$//i')
-  shift
-  local opt="$@"
-  local command="kubectl get ${resource_type} ${opt}"
-
-  eval "$command" | \
-    fzf --header-lines=1 --height=50% \
-        --prompt "> " \
-        --header $' F2 (Refresh) / Ctrl-D (Describe) ╱ Ctrl-E (Edit) ╱ Ctrl-K (Kill) / Ctrl-N (Namespace) ╱ Ctrl-Y (YAML)\n\n' \
-        --bind "F2:reload:($command)" \
-        --bind "CTRL-D:execute(kubectl describe ${resource_type} {1} | nvim -R)" \
-        --bind "CTRL-E:execute:(kubectl edit ${resource_type} {1})" \
-        --bind "CTRL-K:execute:(kubectl delete ${resource_type} {1})" \
-        --bind "CTRL-N:execute-silent(bash -c \"kubectl get ns -o custom-columns=:metadata.name | grep -v '^$' | fzf --tmux | xargs -r kubectl config set-context --current --namespace > /dev/null\")" \
-        --bind "CTRL-Y:execute:(kubectl get ${resource_type} {1} -o yaml | nvim +':set ft=yaml' -R)" \
+  if [[ "$resource_type" == "pods" || "$resource_type" == "pod" || "$resource_type" == "po" ]]; then
+      local command="kubectl get ${resource_type} ${opt}"
+      eval "$command" | \
+        fzf --header-lines=1 --height=90% \
+            --prompt "> " \
+            --header $'Enter (Preview Logs) ╱ Ctrl-B (Bash) / Ctrl-D (Describe) ╱ Ctrl-E (Edit) ╱ Ctrl-K (Kill) ╱ Ctrl-L (Full Logs) / Ctrl-N (Namespace) ╱ Ctrl-R (Refresh) / Ctrl-Y (YAML)\n\n' \
+            --bind "ESC:change-preview-window(hidden)" \
+            --bind "Enter:preview(kubectl logs -f {1})" \
+            --bind "CTRL-B:execute:(kubectl exec -it {1} -- bash 2>/dev/null || kubectl exec -it {1} -- sh > /dev/tty)" \
+            --bind "CTRL-D:execute(kubectl describe ${resource_type} {1} | nvim -R)" \
+            --bind "CTRL-E:execute:(kubectl edit ${resource_type} {1})" \
+            --bind "CTRL-K:execute:(kubectl delete ${resource_type} {1})" \
+            --bind "CTRL-L:execute:(kubectl logs {1} | nvim +':set ft=log' -R)" \
+            --bind "CTRL-N:execute-silent(kubectl get ns -o custom-columns=:metadata.name | grep -v '^$' | fzf --tmux | xargs -r kubectl config set-context --current --namespace > /dev/null\)" \
+            --bind "CTRL-R:reload:($command)" \
+            --bind "CTRL-Y:execute:(kubectl get ${resource_type} {1} -o yaml | nvim +':set ft=yaml' -R)" \
+            --preview-window down:follow:wrap:80% 
+  else
+      local command="kubectl get ${resource_type} ${opt}"
+      eval "$command" | \
+        fzf --header-lines=1 --height=90% \
+            --prompt "> " \
+            --header $'Ctrl-D (Describe) ╱ Ctrl-E (Edit) ╱ Ctrl-K (Kill) / Ctrl-N (Namespace) ╱ Ctrl-R (Refresh) / Ctrl-Y (YAML)\n\n' \
+            --bind "ESC:change-preview-window(hidden)" \
+            --bind "Enter:preview(kubectl logs -f {1})" \
+            --bind "CTRL-D:execute(kubectl describe ${resource_type} {1} | nvim -R)" \
+            --bind "CTRL-K:execute:(kubectl delete ${resource_type} {1})" \
+            --bind "CTRL-N:execute-silent(kubectl get ns -o custom-columns=:metadata.name | grep -v '^$' | fzf --tmux | xargs -r kubectl config set-context --current --namespace > /dev/null\)" \
+            --bind "CTRL-R:reload:($command)" \
+            --bind "CTRL-Y:execute:(kubectl get ${resource_type} {1} -o yaml | nvim +':set ft=yaml' -R)" \
+            --preview-window down:follow:wrap:80% 
+  fi
 }
 
 function kubuectl_switch_context() {
