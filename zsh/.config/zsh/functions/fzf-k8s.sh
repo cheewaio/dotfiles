@@ -44,7 +44,7 @@ function kubectl_interactive_get() {
   fi
 }
 
-function kubuectl_switch_context() {
+function kubectl_switch_context() {
   kubectl config get-contexts -o name | fzf --header 'CONTEXT' | xargs -r kubectl config use-context
 }
 
