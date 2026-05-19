@@ -1,16 +1,20 @@
 ## zsh Options
 setopt HIST_IGNORE_ALL_DUPS
 
+# completion system
+autoload -Uz compinit && compinit -u
+autoload -Uz is-at-least add-zsh-hook
+
 # zsh-syntax-highlighting
 if [[ -n "$(command -v brew 2>/dev/null)" ]]; then
-  FPATH="$(brew --prefix)/share/zsh-syntax-highlighting"
-  [[ -e "$FPATH/zsh-syntax-highlighting.zsh" ]] && source "$FPATH/zsh-syntax-highlighting.zsh"
+  _zp="$(brew --prefix)/share/zsh-syntax-highlighting"
+  [[ -e "$_zp/zsh-syntax-highlighting.zsh" ]] && source "$_zp/zsh-syntax-highlighting.zsh"
 fi
 
 # zsh-autosuggestions
 if [[ -n "$(command -v brew 2>/dev/null)" ]]; then
-  FPATH="$(brew --prefix)/share/zsh-autosuggestions"
-  [[ -e "$FPATH/zsh-autosuggestions.zsh" ]] && source "$FPATH/zsh-autosuggestions.zsh"
+  _zp="$(brew --prefix)/share/zsh-autosuggestions"
+  [[ -e "$_zp/zsh-autosuggestions.zsh" ]] && source "$_zp/zsh-autosuggestions.zsh"
 fi
 
 # starship
