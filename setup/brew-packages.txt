@@ -1,0 +1,12 @@
+zsh-syntax-highlighting
+zsh-autosuggestions
+starship
+tmux
+fd
+neovim
+git
+fzf
+bat
+uv
+zoxide
+pfetch

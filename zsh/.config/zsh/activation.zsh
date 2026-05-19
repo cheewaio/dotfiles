@@ -2,52 +2,52 @@
 setopt HIST_IGNORE_ALL_DUPS
 
 # zsh-syntax-highlighting
-[[ -e "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] || brew install zsh-syntax-highlighting
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# zsh-autosuggestions
-[[ -e "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] || brew install zsh-autosuggestions
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# starship
-[[ -n "$(command -v starship 2>/dev/null)" ]] || brew install starship
-export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
-eval "$(starship init zsh)"
-
-# tmux
-[[ -n "$(command -v tmux 2>/dev/null)" ]] || brew install tmux
-if [[ -z "$TMUX" ]] && [[ "$TERM_PROGRAM" != "vscode" ]] && [[ "$TERM_PROGRAM" != "intellij" ]]; then
-    tmux attach -t tmux || tmux new -s tmux
+if [[ -n "$(command -v brew 2>/dev/null)" ]]; then
+  FPATH="$(brew --prefix)/share/zsh-syntax-highlighting"
+  [[ -e "$FPATH/zsh-syntax-highlighting.zsh" ]] && source "$FPATH/zsh-syntax-highlighting.zsh"
 fi
 
-# fd
-[[ -n "$(command -v fd 2>/dev/null)" ]] || brew install fd
+# zsh-autosuggestions
+if [[ -n "$(command -v brew 2>/dev/null)" ]]; then
+  FPATH="$(brew --prefix)/share/zsh-autosuggestions"
+  [[ -e "$FPATH/zsh-autosuggestions.zsh" ]] && source "$FPATH/zsh-autosuggestions.zsh"
+fi
+
+# starship
+if [[ -n "$(command -v starship 2>/dev/null)" ]]; then
+  export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+  eval "$(starship init zsh)"
+fi
+
+# tmux
+if [[ -n "$(command -v tmux 2>/dev/null)" ]]; then
+  if [[ -z "$TMUX" ]] && [[ "$TERM_PROGRAM" != vscode ]] && [[ "$TERM_PROGRAM" != intellij ]]; then
+    tmux attach -t tmux || tmux new -s tmux
+  fi
+fi
 
 # nvim
-[[ -n "$(command -v nvim 2>/dev/null)" ]] || brew install neovim
-export EDITOR="nvim"
-export VISUAL="nvim"
+if [[ -n "$(command -v nvim 2>/dev/null)" ]]; then
+  export EDITOR="nvim"
+  export VISUAL="nvim"
+fi
 
 # git
-[[ -n "$(command -v git 2>/dev/null)" ]] || brew install git
-export GIT_EDITOR="nvim"
+if [[ -n "$(command -v git 2>/dev/null)" ]]; then
+  export GIT_EDITOR="nvim"
+fi
 
 # fzf
-[[ -n "$(command -v fzf 2>/dev/null)" ]] || brew install fzf
-source <(fzf --zsh)
-export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
-export FZF_DEFAULT_OPTS="--info=inline --reverse --height 40% --color=bg:#262427"
-
-# bat
-[[ -n "$(command -v bat 2>/dev/null)" ]] || brew install bat
-
-# yazi
-[[ -n "$(command -v yazi 2>/dev/null)" ]] || brew install yazi
+if [[ -n "$(command -v fzf 2>/dev/null)" ]]; then
+  source <(fzf --zsh)
+  export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+  export FZF_DEFAULT_OPTS="--info=inline --reverse --height 40% --color=bg:#262427"
+fi
 
 # zoxide
-[[ -n "$(command -v zoxide 2>/dev/null)" ]] || brew install zoxide
-eval "$(zoxide init zsh)"
+if [[ -n "$(command -v zoxide 2>/dev/null)" ]]; then
+  eval "$(zoxide init zsh)"
+fi
 
 # pfetch
-[[ -n "$(command -v pfetch 2>/dev/null)" ]] || brew install pfetch
-pfetch 
+[[ -n "$(command -v pfetch 2>/dev/null)" ]] && pfetch

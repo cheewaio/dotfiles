@@ -13,3 +13,7 @@ for file in "$XDG_CONFIG_HOME/zsh/functions"/*.sh; do
     source "$file"
   fi
 done
+
+if [[ -f "$HOME/.zshrc.local" ]]; then
+  source "$HOME/.zshrc.local"
+fi

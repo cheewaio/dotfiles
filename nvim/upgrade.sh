@@ -17,3 +17,9 @@ rm -rf "${HOME}/.cache/nvim"
 echo "[INFO] Fetching latest AstroNvim ..."
 git clone --depth 1 https://github.com/AstroNvim/template "${NVIM_DIR}"
 rm -rf "${NVIM_DIR}/.git"
+
+if [[ -d "${BACKUP_NVIM_DIR}" ]]; then
+  echo "[INFO] Restoring user configurations from ${BACKUP_NVIM_DIR} ..."
+  cp "${BACKUP_NVIM_DIR}/lua/community.lua" "${NVIM_DIR}/lua/community.lua" 2>/dev/null || true
+  cp "${BACKUP_NVIM_DIR}/lua/plugins/"*.lua "${NVIM_DIR}/lua/plugins/" 2>/dev/null || true
+fi

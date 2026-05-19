@@ -1,6 +1,5 @@
 alias cd=z
 alias cdi=zi
-alias cursor="open -a Cursor"
 alias dps="docker_interactive_ps"
 alias k="kubectl"
 alias kctx="kubectl_switch_context"
@@ -15,4 +14,3 @@ alias kns="kubectl_switch_namespace"
 alias ls="ls -F"
 alias stow="stow -t $HOME"
 alias vi="nvim"
-alias vr="vi_recent_files"
