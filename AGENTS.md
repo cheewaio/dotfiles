@@ -28,7 +28,8 @@ stow -t $HOME zsh nvim tmux starship ghostty
 
 ## Shell (zsh)
 
-- `~/.zshrc` sources everything in `~/.config/zsh/*.zsh`, then `~/.config/zsh/functions/*.sh`, then `~/.zshrc.local` (optional override).
+- `~/.zshrc` sources in order: `~/.config/zsh/*.zsh` → `~/.config/zsh/functions/*.sh` → `~/.config/zsh-local/*.zsh` + `functions/*.sh` → `~/.zshrc.local` (final override).
+- `~/.config/zsh-local/` is **outside stow** — machine-specific overrides (env vars, aliases, custom fzf functions) that aren't committed to the dotfiles repo. Use this for work-laptop customizations. Replacements: `~/.config/zsh-local/*.zsh` for env/aliases, `~/.config/zsh-local/functions/*.sh` for custom functions.
 - `activation.zsh:2` — `setopt HIST_IGNORE_ALL_DUPS`
 - Tools installed via `setup/install.sh` (brew + uv); `activation.zsh` configures tools only when found.
 - Shell prompt is Starship with Gruvbox Dark palette (`starship.toml`).
