@@ -28,8 +28,8 @@ stow -t $HOME zsh nvim tmux starship ghostty
 
 ## Shell (zsh)
 
-- `~/.zshrc` sources in order: `~/.config/zsh/*.zsh` → `~/.config/zsh/functions/*.sh` → `~/.config/zsh-local/*.zsh` + `functions/*.sh` → `~/.zshrc.local` (final override).
-- `~/.config/zsh-local/` is **outside stow** — machine-specific overrides (env vars, aliases, custom fzf functions) that aren't committed to the dotfiles repo. Use this for work-laptop customizations. Replacements: `~/.config/zsh-local/*.zsh` for env/aliases, `~/.config/zsh-local/functions/*.sh` for custom functions.
+- `~/.zshrc` sources in order: `~/.config/zsh/*.zsh` → `~/.config/zsh/functions/*.sh` → `~/.local/config/zsh/*.zsh` + `functions/*.sh` → `~/.local/config/zsh/.zshrc` (final override).
+- `~/.local/config/zsh/` is **outside stow** — machine-specific overrides (env vars, aliases, custom fzf functions) that aren't committed to the dotfiles repo. Use this for work-laptop customizations. Replacements: `~/.local/config/zsh/*.zsh` for env/aliases, `~/.local/config/zsh/functions/*.sh` for custom functions, `~/.local/config/zsh/.zshrc` for the single-file final override.
 - `activation.zsh:2` — `setopt HIST_IGNORE_ALL_DUPS`
 - Tools installed via `setup/install.sh` (brew + uv); `activation.zsh` configures tools only when found.
 - Shell prompt is Starship with Gruvbox Dark palette (`starship.toml`).

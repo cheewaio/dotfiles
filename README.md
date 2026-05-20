@@ -35,24 +35,24 @@ This repository contains configuration files (dotfiles) for setting up your deve
 `.zshrc` sources in this order (later overrides earlier):
 1. `~/.config/zsh/*.zsh` — stowed config (core settings)
 2. `~/.config/zsh/functions/*.sh` — stowed functions
-3. `~/.config/zsh-local/*.zsh` — **local overrides** (env, aliases)
-4. `~/.config/zsh-local/functions/*.sh` — **local functions** (custom fzf, etc.)
-5. `~/.zshrc.local` — final escape hatch
+3. `~/.local/config/zsh/*.zsh` — **local overrides** (env, aliases)
+4. `~/.local/config/zsh/functions/*.sh` — **local functions** (custom fzf, etc.)
+5. `~/.local/config/zsh/.zshrc` — final escape hatch
 
 Items 3–5 live **outside the dotfiles repo** — use them for machine-specific customizations at work.
 
 To get started:
 
 ```sh
-mkdir -p ~/.config/zsh-local/functions
+mkdir -p ~/.local/config/zsh/functions
 ```
 
 | File | What to put there |
 |------|------------------|
-| `~/.config/zsh-local/env.zsh` | Custom env vars (`$PROJECT_HOME`, proxy, etc.) |
-| `~/.config/zsh-local/aliases.zsh` | Custom aliases, tool overrides |
-| `~/.config/zsh-local/functions/*.sh` | Custom fzf wrappers, helper functions |
-| `~/.zshrc.local` | Quick one-off overrides (single file, no dir setup) |
+| `~/.local/config/zsh/env.zsh` | Work-specific env vars (`$PROJECT_HOME`, proxy, etc.) |
+| `~/.local/config/zsh/aliases.zsh` | Work aliases, tool overrides |
+| `~/.local/config/zsh/functions/*.sh` | Custom fzf wrappers, helper functions |
+| `~/.local/config/zsh/.zshrc` | Quick one-off overrides (single file, no dir setup) |
 
 ## Disclaimer
 

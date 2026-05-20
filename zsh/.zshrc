@@ -15,7 +15,7 @@ for file in "$XDG_CONFIG_HOME/zsh/functions"/*.sh; do
 done
 
 # machine-local overrides (outside stow, not in dotfiles repo)
-local_dir="$XDG_CONFIG_HOME/.config/zsh-local"
+local_dir="$HOME/.local/config/zsh"
 if [[ -d "$local_dir" ]]; then
   for file in "$local_dir"/*.zsh; do
     if [[ -f "$file" ]]; then
@@ -30,6 +30,7 @@ if [[ -d "$local_dir" ]]; then
 fi
 
 # final override escape hatch
-if [[ -f "$HOME/.zshrc.local" ]]; then
-  source "$HOME/.zshrc.local"
+local_final="$HOME/.local/config/zsh/.zshrc"
+if [[ -f "$local_final" ]]; then
+  source "$local_final"
 fi
