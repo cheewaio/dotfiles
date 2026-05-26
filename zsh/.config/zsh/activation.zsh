@@ -1,6 +1,14 @@
 ## zsh Options
 setopt HIST_IGNORE_ALL_DUPS
 
+# Homebrew and app upgrades can leave stale completion symlinks behind.
+for completion_dir in $fpath; do
+  [[ -d "$completion_dir" ]] || continue
+  for completion_file in "$completion_dir"/*(N@); do
+    [[ -e "$completion_file" ]] || rm -f "$completion_file"
+  done
+done
+
 # completion system
 autoload -Uz compinit && compinit -u
 autoload -Uz is-at-least add-zsh-hook
@@ -47,6 +55,10 @@ if [[ -n "$(command -v fzf 2>/dev/null)" ]]; then
   export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
   export FZF_DEFAULT_OPTS="--info=inline --reverse --height 40% --color=bg:#262427"
 fi
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && \. "$(brew --prefix)/opt/nvm/nvm.sh"
 
 # zoxide
 if [[ -n "$(command -v zoxide 2>/dev/null)" ]]; then
