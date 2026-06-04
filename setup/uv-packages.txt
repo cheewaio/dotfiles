@@ -1,2 +1,2 @@
 python install
-tool install ansible-core
+tool install ansible-core --with pyyaml
