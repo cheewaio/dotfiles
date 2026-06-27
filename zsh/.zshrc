@@ -8,6 +8,11 @@ if [[ -f "$XDG_CONFIG_HOME/zsh/aliases.zsh" ]]; then
   source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 fi
 
+# activation script
+if [[ -f "$XDG_CONFIG_HOME/zsh/activation.zsh" ]]; then
+  source "$XDG_CONFIG_HOME/zsh/activation.zsh"
+fi
+
 # functions files
 for file in "$XDG_CONFIG_HOME"/zsh/functions/*.sh(N); do
   if [[ -f "$file" ]]; then
@@ -31,11 +36,6 @@ if [[ -d "$local_dir" ]]; then
       source "$file"
     fi
   done
-fi
-
-# activation script
-if [[ -f "$XDG_CONFIG_HOME/zsh/activation.zsh" ]]; then
-  source "$XDG_CONFIG_HOME/zsh/activation.zsh"
 fi
 
 # final local .zshrc override
