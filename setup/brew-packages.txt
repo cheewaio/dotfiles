@@ -9,4 +9,5 @@ fzf
 bat
 uv
 zoxide
-pfetch
+pfetch-rs
+stow

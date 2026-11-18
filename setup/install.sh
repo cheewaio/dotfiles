@@ -19,4 +19,11 @@ for f in "$DIR/zsh/.zshrc" "$DIR/zsh/env.zsh" "$DIR/zsh/aliases.zsh"; do
   [[ ! -f "$dest" ]] && cp "$f" "$dest"
 done
 
-echo "==> Done! Run: cd $DIR/.. && stow zsh nvim tmux starship ghostty"
+echo "==> Stowing dotfiles to $HOME..."
+if [[ -f "$HOME/.zshrc" && ! -L "$HOME/.zshrc" ]]; then
+  echo "    Backing up existing ~/.zshrc to ~/.zshrc.bak"
+  mv "$HOME/.zshrc" "$HOME/.zshrc.bak"
+fi
+stow -d "$DIR/.." -t "$HOME" zsh nvim tmux starship ghostty
+
+echo "==> Done! Reload your shell or run: source ~/.zshrc"

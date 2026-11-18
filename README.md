@@ -20,10 +20,11 @@ This repository contains configuration files (dotfiles) for setting up your deve
    From inside the dotfiles directory, use Stow to symlink the configuration files you want. For example:
    ```sh
    cd ~/dotfiles
-   stow ghostty
-   stow nvim
-   stow starship
-   stow zsh
+   stow -t $HOME ghostty
+   stow -t $HOME nvim
+   stow -t $HOME starship
+   stow -t $HOME tmux
+   stow -t $HOME zsh
    ```
    This will create symlinks in your home directory for the selected configurations.
 
